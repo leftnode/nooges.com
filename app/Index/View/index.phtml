@@ -1,0 +1,37 @@
+<h1>Daily Nooge - <?php echo $nooge->getSubject(); ?></h1>
+
+<p>
+	<?php echo Library::parseBbc($nooge->getBody()); ?>
+</p>
+
+<div class="nooge">
+	<div class="nooge-left">
+		<div class="inner">
+			<form method="post" action="#" class="reply" id="respond-left">
+				<label>Agree Here?</label>
+				<textarea name="response" rows="3" id="response-left-0"></textarea>
+				<p>
+					<input class="button" type="button" value="respond" />
+				</p>
+			</form>
+		
+			<h3>Responses</h3>
+			<?php echo $this->response_list_left; ?>
+		</div>
+	</div>
+	
+	<div class="nooge-right">
+		<div class="inner">
+			<form method="post" action="#" class="reply" id="respond-right">
+				<label>Agree Here?</label>
+				<textarea name="response" rows="3" id="response-right"></textarea>
+				<p>
+					<input class="button" type="button" value="respond" />
+				</p>
+			</form>
+			
+			<h3>Responses</h3>
+			<?php echo $this->response_list_right; ?>
+		</div>
+	</div>
+</div>
