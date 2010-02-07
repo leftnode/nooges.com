@@ -39,9 +39,9 @@ $cookiename = 'SMFCookie886';		# Name of the cookie to set for authentication.
 ########## Database Info ##########
 $db_type = 'mysql';
 $db_server = 'localhost';
-$db_name = 'nooges';
-$db_user = 'root';
-$db_passwd = 'dba89da';
+$db_name = '';
+$db_user = '';
+$db_passwd = '';
 $ssi_db_user = '';
 $ssi_db_passwd = '';
 $db_prefix = 'forum_';
@@ -50,9 +50,9 @@ $db_error_send = 1;
 
 ########## Directories/Files ##########
 # Note: These directories do not have to be changed unless you move things.
-$boarddir = '/var/www/vhosts/nooges.dev/httpdocs/forum';		# The absolute path to the forum's folder. (not just '.'!)
-$sourcedir = '/var/www/vhosts/nooges.dev/httpdocs/forum/Sources';		# Path to the Sources directory.
-$cachedir = '/var/www/vhosts/nooges.dev/httpdocs/forum/cache';		# Path to the cache directory.
+$boarddir = '';		# The absolute path to the forum's folder. (not just '.'!)
+$sourcedir = '';		# Path to the Sources directory.
+$cachedir = '';		# Path to the cache directory.
 
 ########## Error-Catching ##########
 # Note: You shouldn't touch these settings.
