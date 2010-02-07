@@ -366,9 +366,38 @@ form.search input.searchbutton {
 
 .nooge ul li {
 	margin: 10px 0 0 0;
-	padding: 3px;
-	-moz-border-radius: 3px;
+	-moz-border-radius: 5px;
 }
+
+.nooge ul li a:hover {
+	text-decoration: underline;
+}
+
+.nooge ul li div.content {
+	padding: 3px;
+}
+
+.nooge ul li ul {
+	margin: 0;
+	background: #fff;
+	padding-top: 5px;
+	padding-left: 15px;
+}
+
+.nooge ul li ul li {
+	margin: 10px 0 0 0;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #B6B6B6;
+	-moz-border-radius: 0;
+}
+
+
+.nooge ul li ul li.respond-form {
+	border-bottom: 0;
+}
+
+
+
 
 .nooge ul li.zebra1 {
 	background: #ECEFF5;
@@ -376,16 +405,6 @@ form.search input.searchbutton {
 
 .nooge ul li.zebra2 {
 	background: #E0E2E4;
-}
-
-.nooge ul li.response {
-	margin: 5px 0 0 0;
-	margin-left: 15px;
-	border-bottom: 1px solid #B6B6B6;
-}
-
-.nooge ul li.response.last {
-	border-bottom: 0;
 }
 
 .nooge ul li div.author {

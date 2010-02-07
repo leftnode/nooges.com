@@ -3,3 +3,10 @@
 	<?php $response_list_item->response = $response; ?>
 	<?php echo $response_list_item->render('Index', 'response-list-child-item'); ?>
 <?php endforeach; ?>
+
+<li class="response respond-form" id="response-form-<?php echo $parent_id; ?>">
+	<form method="post" action="#" class="respond">
+		<textarea rows="3" id="response-left-<?php echo $parent_id; ?>"></textarea>
+		<p><input class="button" type="button" value="respond" onclick="Nooges.create('response-children-<?php echo $parent_id; ?>', 'response-left-<?php echo $parent_id; ?>', <?php echo $topic_id; ?>, <?php echo $parent_id; ?>, <?php echo $side; ?>);"></p>
+	</form>
+</li>

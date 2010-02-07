@@ -162,38 +162,27 @@ class Index_Controller extends Artisan_Controller {
 	
 	
 	
-	public function loadResponseFormPost() {
-		$this->setLayout(NULL);
-
-		try {
-			$response_id = intval($this->getParam('response_id'));
-			
-			$nooges_response = Nooges::getDataModel()
-				->where('nooges_response_id = ?', $response_id)
-				->loadFirst(new Nooges_Response());
-				
-			$this->rid = $response_id;
-			$this->topic_id = $nooges_response->getIdTopic();
-			$this->side = $nooges_response->getSide();
-			
-			$this->render('index/response-form');
-		} catch ( Exception $e ) { }
-	}
-
+	
+	
 	
 	public function loadResponseChildrenPost() {
 		$this->setLayout(NULL);
 		
 		try {
+			$response_id = intval($this->getParam('response_id'));
+			
 			$forum_messages = new Forum_Messages();
 			$nooges_response = new Nooges_Response();
-			$response_id = intval($this->getParam('response_id'));
 			
 			$this->response_list = Nooges::getDataModel()
 				->innerJoin($forum_messages, $nooges_response, NULL, 'id_msg')
 				->where($nooges_response->fieldOp('parent_id', '='), $response_id)
 				->orderBy($nooges_response->field('date_create'), 'DESC')
 				->loadAll($forum_messages);
+				
+			$this->side = 0;
+			$this->topic_id = 0;
+			$this->parent_id = $response_id;
 			$this->render('index/response-list-child');
 		} catch ( Exception $e ) { }
 	}

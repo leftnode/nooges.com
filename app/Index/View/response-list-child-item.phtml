@@ -1,6 +1,6 @@
 <?php $rid = $response->getNoogesResponseId(); ?>
 
-<li class="response" id="response-<?php echo $rid; ?>">
+<li id="response-<?php echo $rid; ?>">
 	<?php $body = $response->getBody(); ?>
 	<?php $body = Library::removeHtml($body); ?>
 	<?php $body = $this->safe($body); ?>

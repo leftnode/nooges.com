@@ -1,26 +1,28 @@
 <?php $rid = $response->getNoogesResponseId(); ?>
 
 <li id="response-<?php echo $rid; ?>">
-	<?php $body = $response->getBody(); ?>
-	<?php $body = Library::removeHtml($body); ?>
-	<?php $body = $this->safe($body); ?>
-	<?php echo nl2br($body); ?>
-	
-	<?php $member_id = $response->getIdMember(); ?>
-	
-	<div class="author">
-		<?php if ( $member_id > 0 ): ?>
-			- <a href="/forum/index.php?action=profile;u=<?php echo $member_id; ?>"><?php echo $response->getPosterName(); ?></a>
-		<?php else: ?>
-			- <?php echo $response->getPosterName(); ?>
-		<?php endif; ?>
-	</div>
-	
-	<div class="action-list">
-		<a href="javascript:Nooges.loadResponseForm(<?php echo $rid; ?>)" id="response-respond-<?php echo $rid; ?>">respond</a>
-		<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>
-		<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_DOWN; ?>)">-dislike (<span id="response-dislike-<?php echo $rid; ?>"><?php echo $response->getDislikeCount(); ?></span>)</a>
-		<a href="javascript:Nooges.loadResponseChildren(<?php echo $rid; ?>)">see responses</a>
+	<div class="content">
+		<?php $body = $response->getBody(); ?>
+		<?php $body = Library::removeHtml($body); ?>
+		<?php $body = $this->safe($body); ?>
+		<?php echo nl2br($body); ?>
+		
+		<?php $member_id = $response->getIdMember(); ?>
+		
+		<div class="author">
+			<?php if ( $member_id > 0 ): ?>
+				- <a href="/forum/index.php?action=profile;u=<?php echo $member_id; ?>"><?php echo $response->getPosterName(); ?></a>
+			<?php else: ?>
+				- <?php echo $response->getPosterName(); ?>
+			<?php endif; ?>
+		</div>
+		
+		<div class="action-list">
+			<!--<a href="javascript:Nooges.loadResponseForm(<?php echo $rid; ?>)" id="response-respond-<?php echo $rid; ?>">respond</a>-->
+			<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>
+			<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_DOWN; ?>)">-dislike (<span id="response-dislike-<?php echo $rid; ?>"><?php echo $response->getDislikeCount(); ?></span>)</a>
+			<a href="javascript:Nooges.loadResponseChildren(<?php echo $rid; ?>)">see responses</a>
+		</div>
 	</div>
 	
 	<ul class="response-children" id="response-children-<?php echo $rid; ?>"></ul>
