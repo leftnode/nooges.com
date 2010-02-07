@@ -179,9 +179,14 @@ class Index_Controller extends Artisan_Controller {
 				->where($nooges_response->fieldOp('parent_id', '='), $response_id)
 				->orderBy($nooges_response->field('date_create'), 'DESC')
 				->loadAll($forum_messages);
-				
-			$this->side = 0;
-			$this->topic_id = 0;
+			
+			
+			$nooges_response = Nooges::getDataModel()
+				->where('nooges_response_id = ?', $response_id)
+				->loadFirst($nooges_response);
+			
+			$this->side = $nooges_response->getSide();
+			$this->topic_id = $nooges_response->getIdTopic();
 			$this->parent_id = $response_id;
 			$this->render('index/response-list-child');
 		} catch ( Exception $e ) { }
