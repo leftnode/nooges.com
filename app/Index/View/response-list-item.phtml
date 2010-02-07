@@ -1,0 +1,14 @@
+<li>
+	<?php $body = $response->getBody(); ?>
+	<?php $body = Library::removeHtml($body); ?>
+	<?php $body = $this->safe($body); ?>
+	<?php echo nl2br($body); ?>
+	
+	<div class="author">- <?php echo $response->getPosterName(); ?></div>
+	<div class="action-list">
+		<a href="#">respond</a>
+		<a href="#">+like (<span><?php echo $response->getLikeCount(); ?></span>)</a>
+		<a href="#">-dislike (<span><?php echo $response->getDislikeCount(); ?></span>)</a>
+		<a href="#">see responses</a>
+	</div>
+</li>

@@ -81,14 +81,6 @@ class Nooges {
 		echo $artisanRouter->dispatch();
 	}
 	
-	public static function buildView() {
-		$view = new Artisan_View(self::$config_router['root_dir']);
-		$view->setIsRewrite(self::$config_router['rewrite'])
-			->setSiteRoot(self::$config_router['site_root'])
-			->setSiteRootSecure(self::$config_router['site_root_secure']);
-		return $view;
-	}
-	
 	public static function createToken() {
 		if ( false === exs(SESSION_TOKEN, $_SESSION) ) {
 			$token = mt_rand(1000000, mt_getrandmax());
@@ -139,5 +131,13 @@ class Nooges {
 	
 	public static function getTokenSalt() {
 		return $_SESSION[SESSION_TOKEN_SALT];
+	}
+	
+	public static function getView() {
+		$view = new Artisan_View(self::$config_router['root_dir']);
+		$view->setIsRewrite(self::$config_router['rewrite'])
+			->setSiteRoot(self::$config_router['site_root'])
+			->setSiteRootSecure(self::$config_router['site_root_secure']);
+		return $view;
 	}
 }

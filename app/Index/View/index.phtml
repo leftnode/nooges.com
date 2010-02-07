@@ -7,31 +7,35 @@
 <div class="nooge">
 	<div class="nooge-left">
 		<div class="inner">
-			<form method="post" action="#" class="reply" id="respond-left">
+			<form method="post" action="#" class="reply">
 				<label>Agree Here?</label>
-				<textarea name="response" rows="3" id="response-left-0"></textarea>
+				<textarea name="response" rows="3" id="response-left"></textarea>
 				<p>
-					<input class="button" type="button" value="respond" />
+					<input class="button" type="button" value="respond" onclick="Nooges.createNooge('response-list-left', 'response-left', <?php echo $nooge->getIdTopic(); ?>, 0, 0);" />
 				</p>
 			</form>
 		
 			<h3>Responses</h3>
-			<?php echo $this->response_list_left; ?>
+			<ul class="zebra-stripe" id="response-list-left">
+				<?php echo $this->response_list_left; ?>
+			</ul>
 		</div>
 	</div>
 	
 	<div class="nooge-right">
 		<div class="inner">
-			<form method="post" action="#" class="reply" id="respond-right">
+			<form method="post" action="#" class="reply">
 				<label>Agree Here?</label>
 				<textarea name="response" rows="3" id="response-right"></textarea>
 				<p>
-					<input class="button" type="button" value="respond" />
+					<input class="button" type="button" value="respond" onclick="Nooges.createNooge('response-list-right', 'response-right', <?php echo $nooge->getIdTopic(); ?>, 0, 1);" />
 				</p>
 			</form>
 			
 			<h3>Responses</h3>
-			<?php echo $this->response_list_right; ?>
+			<ul class="zebra-stripe" id="response-list-right">
+				<?php echo $this->response_list_right; ?>
+			</ul>
 		</div>
 	</div>
 </div>

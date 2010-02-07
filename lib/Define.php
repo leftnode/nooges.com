@@ -9,3 +9,9 @@ define('STATUS_ENABLED', 1, false);
 
 /* ID of the Board that contains the latest Nooges. */
 define('NOOGES_BOARD_ID', 2, false);
+
+define('NOOGES_ANONYMOUS_USER', 'Anonymous Bozo', false);
+define('NOOGES_ANONYMOUS_EMAIL', 'anonymous@nooges.com', false);
+
+define('ZEBRA1', 'zebra1', false);
+define('ZEBRA2', 'zebra2', false);

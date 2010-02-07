@@ -1,0 +1,9 @@
+<?php if ( $response_list->length() > 0 ): ?>
+	<?php foreach ( $response_list as $response ): ?>
+		<?php $response_list_item = Nooges::getView(); ?>
+		<?php $response_list_item->response = $response; ?>
+		<?php echo $response_list_item->render('Index', 'response-list-item'); ?>
+	<?php endforeach; ?>
+<?php else: ?>
+	<li>No Nooges Yet!</li>
+<?php endif; ?>

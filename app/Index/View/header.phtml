@@ -4,3 +4,22 @@
 <?php echo $this->css($css_nooges, 'screen', false); ?>
 
 <?php echo $this->js($js_jquery); ?>
+<?php echo $this->js($js_nooges); ?>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		zebraStripe();
+		
+		$('#response-list-left, #response-list-right').bind('zebra-stripe', function() {
+			zebraStripe();
+		});
+	});
+	
+	function zebraStripe() {
+		$('#response-list-left li:even').attr('class', 'zebra1');
+		$('#response-list-left li:odd').attr('class', 'zebra2');
+		
+		$('#response-list-right li:even').attr('class', 'zebra1');
+		$('#response-list-right li:odd').attr('class', 'zebra2');
+	}
+</script>
