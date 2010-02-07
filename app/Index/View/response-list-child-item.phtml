@@ -1,0 +1,17 @@
+<?php $rid = $response->getNoogesResponseId(); ?>
+
+<li class="response" id="response-<?php echo $rid; ?>">
+	<?php $body = $response->getBody(); ?>
+	<?php $body = Library::removeHtml($body); ?>
+	<?php $body = $this->safe($body); ?>
+	<?php echo nl2br($body); ?>
+	
+	<?php $member_id = $response->getIdMember(); ?>
+	<div class="author">
+		<?php if ( $member_id > 0 ): ?>
+			- <a href="/forum/index.php?action=profile;u=<?php echo $member_id; ?>"><?php echo $response->getPosterName(); ?></a>
+		<?php else: ?>
+			- <?php echo $response->getPosterName(); ?>
+		<?php endif; ?>
+	</div>
+</li>

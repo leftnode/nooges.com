@@ -5,6 +5,9 @@ class Index_Controller extends Artisan_Controller {
 	/// The name of the layout to use. Can be overwritten.
 	protected $layout = 'nooges';
 	
+	
+	
+	
 	public function indexGet() {
 		try {
 			/* Some globals used for later. */
@@ -146,12 +149,55 @@ class Index_Controller extends Artisan_Controller {
 					->loadFirst($forum_messages);
 				$this->response = $response;
 				
-				$this->render('index/response-list-item');
+				if ( $parent_id > 0 ) {
+					$this->render('index/response-list-child-item');
+				} else {
+					$this->render('index/response-list-item');
+				}
 			}
 		} catch ( Exception $e ) { }
 		
 		return true;
 	}
+	
+	
+	
+	public function loadResponseFormPost() {
+		$this->setLayout(NULL);
+
+		try {
+			$response_id = intval($this->getParam('response_id'));
+			
+			$nooges_response = Nooges::getDataModel()
+				->where('nooges_response_id = ?', $response_id)
+				->loadFirst(new Nooges_Response());
+				
+			$this->rid = $response_id;
+			$this->topic_id = $nooges_response->getIdTopic();
+			$this->side = $nooges_response->getSide();
+			
+			$this->render('index/response-form');
+		} catch ( Exception $e ) { }
+	}
+
+	
+	public function loadResponseChildrenPost() {
+		$this->setLayout(NULL);
+		
+		try {
+			$forum_messages = new Forum_Messages();
+			$nooges_response = new Nooges_Response();
+			$response_id = intval($this->getParam('response_id'));
+			
+			$this->response_list = Nooges::getDataModel()
+				->innerJoin($forum_messages, $nooges_response, NULL, 'id_msg')
+				->where($nooges_response->fieldOp('parent_id', '='), $response_id)
+				->orderBy($nooges_response->field('date_create'), 'DESC')
+				->loadAll($forum_messages);
+			$this->render('index/response-list-child');
+		} catch ( Exception $e ) { }
+	}
+	
 	
 	public function votePost() {
 		$this->setLayout(NULL);

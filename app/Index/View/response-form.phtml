@@ -1,0 +1,6 @@
+<li class="response last" id="response-form-<?php echo $rid; ?>">
+	<form method="post" action="#" class="respond">
+		<textarea rows="3" id="response-left-<?php echo $rid; ?>"></textarea>
+		<p><input class="button" type="button" value="respond" onclick="Nooges.create('response-children-<?php echo $rid; ?>', 'response-left-<?php echo $rid; ?>', <?php echo $topic_id; ?>, <?php echo $rid; ?>, <?php echo $side; ?>);"></p>
+	</form>
+</li>

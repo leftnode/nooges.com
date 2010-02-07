@@ -45,10 +45,27 @@ var Nooges = {
 	},
 	
 	
+	loadResponseForm: function(response_id) {
+		var data = {
+			response_id: response_id
+		};
+		
+		Nooges.postHtml(Nooges.buildUrl('index/loadresponseform'), data, function(html) {
+			$('#response-respond-' + response_id).hide();
+			$('#response-children-' + response_id).append(html);
+		});
+	},
 	
 	
-	
-	
+	loadResponseChildren: function(response_id) {
+		var data = {
+			response_id: response_id
+		};
+		
+		Nooges.postHtml(Nooges.buildUrl('index/loadresponsechildren'), data, function(html) {
+			$('#response-children-' + response_id).html(html);
+		});
+	},
 	
 	
 	postHtml: function(url, data, callback) {

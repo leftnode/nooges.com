@@ -9,9 +9,9 @@
 		<div class="inner">
 			<form method="post" action="#" class="reply">
 				<label>Agree Here?</label>
-				<textarea name="response" rows="3" id="response-left"></textarea>
+				<textarea rows="3" id="response-left"></textarea>
 				<p>
-					<input class="button" type="button" value="respond" onclick="Nooges.create('response-list-left', 'response-left', <?php echo $nooge->getIdTopic(); ?>, 0, 0);" />
+					<input class="button" type="button" value="respond" onclick="Nooges.create('response-list-left', 'response-left', <?php echo $nooge->getIdTopic(); ?>, 0, 0);">
 				</p>
 			</form>
 		
@@ -26,9 +26,9 @@
 		<div class="inner">
 			<form method="post" action="#" class="reply">
 				<label>Agree Here?</label>
-				<textarea name="response" rows="3" id="response-right"></textarea>
+				<textarea rows="3" id="response-right"></textarea>
 				<p>
-					<input class="button" type="button" value="respond" onclick="Nooges.create('response-list-right', 'response-right', <?php echo $nooge->getIdTopic(); ?>, 0, 1);" />
+					<input class="button" type="button" value="respond" onclick="Nooges.create('response-list-right', 'response-right', <?php echo $nooge->getIdTopic(); ?>, 0, 1);">
 				</p>
 			</form>
 			

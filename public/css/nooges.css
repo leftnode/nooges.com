@@ -78,11 +78,11 @@ form {
 }
 
 form.reply {
-	width: 255px;
+	width: 305px;
 }
 
 form.respond {
-	width: 240px;
+	width: 285px;
 }
 
 label {
@@ -99,16 +99,16 @@ input {
 }
 
 textarea {
-	width: 250px;
-	padding:2px;
+	width: 300px;
+	padding: 2px;
 	font: normal 1em verdana, sans-serif;
-	border:1px solid #D8D8D8;
-	display:block;
-	color:#777;
+	border: 1px solid #D8D8D8;
+	display: block;
+	color: #272727;
 }
 
 form.respond textarea {
-	width: 235px;
+	width: 280px;
 }
 
 form p {
