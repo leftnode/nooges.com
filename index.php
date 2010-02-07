@@ -38,7 +38,6 @@ foreach ( $response_list as $response ) {
 	}
 }
 
-
 require_once 'view/index.phtml';
 
 unset($pdo);

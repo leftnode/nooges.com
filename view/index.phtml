@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="/js/jquery.js"></script>
 	<script type="text/javascript">
 		var Nooges = {
-			respond: function(response_id) {
+			respond: function(response_id, side, parent_id) {
 				var message = $('#' + response_id).val();
 				if ( 0 == message.length ) {
 					alert('Please enter a response first!');
@@ -22,8 +22,8 @@
 				
 				var data = {
 					message: message,
-					side: 0,
-					parent_id: 0
+					side: side,
+					parent_id: parent_id
 				};
 				
 				this.postHtml('respond.http.php', data, function(html) {
@@ -119,8 +119,7 @@
 							<label>Respond!</label>
 							<textarea name="response" rows="3" id="response-left"></textarea>
 							<p>
-								<input type="hidden" name="side" value="0" />
-								<input class="button" type="button" value="Respond" onclick="Nooges.respond('response-left')" />
+								<input class="button" type="button" value="Respond" onclick="Nooges.respond('response-left', 0, 0)" />
 							</p>
 						</form>
 					
@@ -129,7 +128,7 @@
 							<?php $i = 0; ?>
 							<?php foreach ( $response_list_left as $response ): ?>
 								<li class="<?php echo $zebra_list[$i++%2]; ?>">
-									<?php echo nooges_remove_html($response['body']); ?>
+									<?php echo nl2br(nooges_remove_html($response['body'])); ?>
 									<div class="author">- <?php echo $response['poster_name']; ?></div>
 									<div class="action-list">
 										<a href="#">respond</a>
@@ -147,15 +146,28 @@
 					<div class="inner">
 						<form method="post" action="#" class="reply" id="respond-right">
 							<label>Respond!</label>
-							<textarea rows="3"></textarea>
-							<p><input class="button" type="submit" value="Respond" /></p>
+							<textarea name="response" rows="3" id="response-right"></textarea>
+							<p>
+								<input class="button" type="button" value="Respond" onclick="Nooges.respond('response-right', 1, 0)" />
+							</p>
 						</form>
 						
 						<h3>Responses</h3>
-						<?php foreach ( $response_list_right as $response ): ?>
-						
-						
-						<?php endforeach; ?>
+						<ul>
+							<?php $i = 0; ?>
+							<?php foreach ( $response_list_right as $response ): ?>
+								<li class="<?php echo $zebra_list[$i++%2]; ?>">
+									<?php echo nl2br(nooges_remove_html($response['body'])); ?>
+									<div class="author">- <?php echo $response['poster_name']; ?></div>
+									<div class="action-list">
+										<a href="#">respond</a>
+										<a href="#">+ like</a>
+										<a href="#">- dislike</a>
+										<a href="#">see responses</a>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
 					</div>
 				</div>
 			</div>
