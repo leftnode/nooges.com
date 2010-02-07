@@ -15,3 +15,6 @@ define('NOOGES_ANONYMOUS_EMAIL', 'anonymous@nooges.com', false);
 
 define('ZEBRA1', 'zebra1', false);
 define('ZEBRA2', 'zebra2', false);
+
+define('VOTE_UP', 1, false);
+define('VOTE_DOWN', -1, false);

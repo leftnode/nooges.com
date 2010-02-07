@@ -1,21 +1,48 @@
 var Nooges = {
-	createNooge: function(response_list, textarea_element, topic_id, parent_id, side) {
+	create: function(response_list, textarea_element, topic_id, parent_id, side) {
 		var message_element = $('#' + textarea_element);
+		var message = message_element.val();
+		
+		if ( 0 == message.length ) {
+			alert('Please enter a message first!');
+		}
 		
 		var data = {
 			topic_id: topic_id,
-			message: message_element.val(),
+			message: message,
 			parent_id: parent_id,
 			side: side
 		};
 		
-		Nooges.postHtml(Nooges.buildUrl('index/createnooge'), data, function(html) {
+		Nooges.postHtml(Nooges.buildUrl('index/create'), data, function(html) {
 			message_element.val('');
 			$('#' + response_list).prepend(html).trigger('zebra-stripe');
 		});
 	},
 	
-	
+	vote: function(response_id, direction) {
+		response_id = parseInt(response_id);
+		direction = parseInt(direction);
+		
+		if ( 0 == response_id || true === isNaN(response_id) ) {
+			alert('Please vote for an actual response');
+		}
+		
+		if ( -1 != direction && 1 != direction ) {
+			direction = 1;
+		}
+		
+		var data = {
+			response_id: response_id,
+			direction: direction
+		};
+		
+		Nooges.postHtml(Nooges.buildUrl('index/vote'), data, function(html) {
+			var id = ( -1 == direction ? '#response-dislike-' + response_id : '#response-like-' + response_id );
+			$(id).html(html);
+		});
+		
+	},
 	
 	
 	

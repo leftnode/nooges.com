@@ -71,35 +71,6 @@ ul, ol {
 	padding: 0 20px;
 }
 
-code {
-  margin: 10px 0;
-  padding: 10px;
-  text-align: left;
-  display: block;
-  overflow: auto;  
-  font: 500 1em/1.5em 'Lucida Console', 'courier new', monospace;
-  
-  /* white-space: pre; */
-  background: #FAFAFA;
-  border: 1px solid #f2f2f2;  
-  border-left: 4px solid #CC0000;
-}
-
-acronym {
-  cursor: help;
-  border-bottom: 1px solid #777;
-}
-
-blockquote {
-	margin: 10px;
- 	padding: 0 0 0 32px;  	
-  	background: #FAFAFA url('image/quote.gif') no-repeat 5px 10px !important; 
-	background-position: 8px 10px;
-	border: 1px solid #f2f2f2; 
-	border-left: 4px solid #CC0000; 
-	font-weight: bold;  
-}
-
 /* form elements */
 form {
 	margin:0;
@@ -189,7 +160,7 @@ form.search input.searchbutton {
 ***********************************/
 #wrap {
 	margin: 0 auto; 
-	width: 780px;
+	width: 900px;
 }
 
 /* header */
@@ -273,8 +244,9 @@ form.search input.searchbutton {
 #main {
 	float: right;
 	margin: 0; padding: 0;
-	width: 545px;	
+	width: 650px;	
 }
+
 #main h1 {
 	margin: 10px 0;
 	padding: 4px 0 4px 8px; 
@@ -288,8 +260,9 @@ form.search input.searchbutton {
 /* sidebar */
 #sidebar {
 	float: left;
-	width: 220px;
-	margin: 0; padding: 0; 
+	width: 240px;
+	margin: 0 10px 0 0;
+	padding: 0; 
 	background-color: #FFFFFF; 	
 }
 #sidebar h1 {
@@ -359,7 +332,7 @@ form.search input.searchbutton {
 /* Nooges.com specific styles */
 .nooge-left {
 	float: left;
-	width: 270px;
+	width: 324px;
 	border-right: 1px solid #ababab;
 	border-top: 1px solid #ababab;
 	min-height: 600px;
@@ -371,7 +344,7 @@ form.search input.searchbutton {
 
 .nooge-right {
 	float: left;
-	width: 270px;
+	width: 325px;
 	border-top: 1px solid #ababab;
 }
 
@@ -427,7 +400,7 @@ form.search input.searchbutton {
 }
 
 .nooge ul li div.action-list a {
-	margin-right: 5px;
+	margin-right: 10px;
 	font-size: 10px;
 }
 

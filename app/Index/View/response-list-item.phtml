@@ -1,4 +1,5 @@
 <li>
+	<?php $rid = $response->getNoogesResponseId(); ?>
 	<?php $body = $response->getBody(); ?>
 	<?php $body = Library::removeHtml($body); ?>
 	<?php $body = $this->safe($body); ?>
@@ -7,8 +8,8 @@
 	<div class="author">- <?php echo $response->getPosterName(); ?></div>
 	<div class="action-list">
 		<a href="#">respond</a>
-		<a href="#">+like (<span><?php echo $response->getLikeCount(); ?></span>)</a>
-		<a href="#">-dislike (<span><?php echo $response->getDislikeCount(); ?></span>)</a>
+		<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>
+		<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_DOWN; ?>)">-dislike (<span id="response-dislike-<?php echo $rid; ?>"><?php echo $response->getDislikeCount(); ?></span>)</a>
 		<a href="#">see responses</a>
 	</div>
 </li>

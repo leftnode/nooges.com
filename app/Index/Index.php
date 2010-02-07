@@ -33,7 +33,6 @@ class Index_Controller extends Artisan_Controller {
 				->loadAll($forum_messages);
 
 			$this->nooge = $nooge;
-
 			$this->response_list_left = $this->renderNoogeList($nooge_list, 0);
 			$this->response_list_right = $this->renderNoogeList($nooge_list, 1);
 
@@ -65,7 +64,7 @@ class Index_Controller extends Artisan_Controller {
 	
 	
 	
-	public function createNoogePost() {
+	public function createPost() {
 		$this->setLayout(NULL);
 		
 		try {
@@ -118,7 +117,41 @@ class Index_Controller extends Artisan_Controller {
 		return true;
 	}
 	
-	
+	public function votePost() {
+		$this->setLayout(NULL);
+		
+		try {
+			$votes = 0;
+			$response_id = intval($this->getParam('response_id'));
+			$direction = intval($this->getParam('direction'));
+			
+			if ( VOTE_UP != $direction && VOTE_DOWN != $direction ) {
+				$direction = 1;
+			}
+			
+			$nooges_response = Nooges::getDataModel()
+				->where('nooges_response_id = ?', $response_id)
+				->loadFirst(new Nooges_Response());
+			
+			switch ( $direction ) {
+				case VOTE_UP: {
+					$votes = $nooges_response->voteUp();
+					break;
+				}
+				
+				case VOTE_DOWN: {
+					$votes = $nooges_response->voteDown();
+					break;
+				}
+			}
+			
+			Nooges::getDataModel()->save($nooges_response);
+		} catch ( Exception $e ) { }
+		
+		echo $votes;
+		
+		return true;
+	}
 	
 	
 	
