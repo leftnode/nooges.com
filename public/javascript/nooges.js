@@ -41,17 +41,16 @@ var Nooges = {
 			var id = ( -1 == direction ? '#response-dislike-' + response_id : '#response-like-' + response_id );
 			$(id).html(html);
 		});
-		
 	},
 	
 	
-	loadResponseChildren: function(response_id) {
+	load: function(response_id) {
 		var data = {
 			response_id: response_id
 		};
 		
-		Nooges.postHtml(Nooges.buildUrl('index/loadresponsechildren'), data, function(html) {
-			$('#response-children-' + response_id).html(html);
+		Nooges.postHtml(Nooges.buildUrl('index/load'), data, function(html) {
+			$('#response-list-children-' + response_id).html(html);
 		});
 	},
 	

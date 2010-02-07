@@ -16,10 +16,7 @@
 	});
 	
 	function zebraStripe() {
-		$('#response-list-left > li:even').attr('class', 'zebra1');
-		$('#response-list-left > li:odd').attr('class', 'zebra2');
-		
-		$('#response-list-right > li:even').attr('class', 'zebra1');
-		$('#response-list-right > li:odd').attr('class', 'zebra2');
+		$('#response-list-left > li:even, #response-list-right > li:even').attr('class', 'zebra1');
+		$('#response-list-left > li:odd, #response-list-right > li:odd').attr('class', 'zebra2');
 	}
 </script>

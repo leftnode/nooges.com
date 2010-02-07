@@ -17,13 +17,16 @@
 			<?php endif; ?>
 		</div>
 		
-		<div class="action-list">
-			<!--<a href="javascript:Nooges.loadResponseForm(<?php echo $rid; ?>)" id="response-respond-<?php echo $rid; ?>">respond</a>-->
-			<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>
-			<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_DOWN; ?>)">-dislike (<span id="response-dislike-<?php echo $rid; ?>"><?php echo $response->getDislikeCount(); ?></span>)</a>
-			<a href="javascript:Nooges.loadResponseChildren(<?php echo $rid; ?>)">see responses</a>
-		</div>
+		<?php if ( true === $include_action_list ): ?>
+			<div class="action-list">
+				<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>
+				<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_DOWN; ?>)">-dislike (<span id="response-dislike-<?php echo $rid; ?>"><?php echo $response->getDislikeCount(); ?></span>)</a>
+				<a href="javascript:Nooges.load(<?php echo $rid; ?>)">see responses</a>
+			</div>
+		<?php endif; ?>
 	</div>
 	
-	<ul class="response-children" id="response-children-<?php echo $rid; ?>"></ul>
+	<?php if ( true === $include_children ): ?>
+		<ul id="response-list-children-<?php echo $rid; ?>"></ul>
+	<?php endif; ?>
 </li>

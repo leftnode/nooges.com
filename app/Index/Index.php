@@ -36,8 +36,12 @@ class Index_Controller extends Artisan_Controller {
 				->loadAll($forum_messages);
 
 			$this->nooge = $nooge;
-			$this->response_list_left = $this->renderNoogeList($nooge_list, 0);
-			$this->response_list_right = $this->renderNoogeList($nooge_list, 1);
+			
+			$nooge_list_left = $nooge_list->filter('side = ?', SIDE_LEFT)->fetch();
+			$nooge_list_right = $nooge_list->filter('side = ?', SIDE_RIGHT)->fetch();
+			
+			$this->response_list_left = $this->renderResponseList($nooge_list_left);
+			$this->response_list_right = $this->renderResponseList($nooge_list_right);
 
 			$this->renderLayout('index');
 		} catch ( Exception $e ) { }
@@ -147,13 +151,8 @@ class Index_Controller extends Artisan_Controller {
 					->innerJoin($forum_messages, new Nooges_Response(), NULL, 'id_msg')
 					->where($nooges_response->fieldOp('nooges_response_id', '='), $nooges_response_id)
 					->loadFirst($forum_messages);
-				$this->response = $response;
-				
-				if ( $parent_id > 0 ) {
-					$this->render('index/response-list-child-item');
-				} else {
-					$this->render('index/response-list-item');
-				}
+
+				$this->renderResponse($response);
 			}
 		} catch ( Exception $e ) { }
 		
@@ -165,7 +164,7 @@ class Index_Controller extends Artisan_Controller {
 	
 	
 	
-	public function loadResponseChildrenPost() {
+	public function loadPost() {
 		$this->setLayout(NULL);
 		
 		try {
@@ -174,21 +173,18 @@ class Index_Controller extends Artisan_Controller {
 			$forum_messages = new Forum_Messages();
 			$nooges_response = new Nooges_Response();
 			
-			$this->response_list = Nooges::getDataModel()
+			$response_list = Nooges::getDataModel()
 				->innerJoin($forum_messages, $nooges_response, NULL, 'id_msg')
 				->where($nooges_response->fieldOp('parent_id', '='), $response_id)
 				->orderBy($nooges_response->field('date_create'), 'DESC')
 				->loadAll($forum_messages);
 			
-			
-			$nooges_response = Nooges::getDataModel()
+			$nooge_response = Nooges::getDataModel()
 				->where('nooges_response_id = ?', $response_id)
 				->loadFirst($nooges_response);
 			
-			$this->side = $nooges_response->getSide();
-			$this->topic_id = $nooges_response->getIdTopic();
-			$this->parent_id = $response_id;
-			$this->render('index/response-list-child');
+			$this->renderResponseList($response_list, $nooge_response->getSide(), $response_id, $nooge_response->getIdTopic());
+
 		} catch ( Exception $e ) { }
 	}
 	
@@ -281,16 +277,42 @@ class Index_Controller extends Artisan_Controller {
 		exit;
 	}
 	
-	private function renderNoogeList(DataIterator $nooge_list, $side) {
-		$nooge_list->reset();
-		$response_list = $nooge_list->filter('side = ?', $side)
-			->fetch();
-			
-		$this->response_list = $response_list;
-		$this->side = $side;
+	private function renderResponseList(DataIterator $response_list, $side=-1, $parent_id=0, $topic_id=-1) {
+		$response_list_parsed = array();
+		foreach ( $response_list as $response ) {
+			$response_list_parsed[] = $this->renderResponse($response);
+		}
 		
-		$response_list = $this->render('index/response-list');
-		return $response_list;
+		$is_parent = true;
+		if ( $parent_id > 0 ) {
+			$is_parent = false;
+		}
+		
+		$this->side = $side;
+		$this->parent_id = $parent_id;
+		$this->is_parent = $is_parent;
+		$this->topic_id = $topic_id;
+		
+		$this->response_list_html = implode(PHP_EOL, $response_list_parsed);
+		$response_list_html = $this->render('index/response-list');
+
+		return $response_list_html;
+	}
+	
+	private function renderResponse($response) {
+		$parent_id = $response->getParentId();
+		
+		$include_action_list = $include_children = true;
+		if ( $parent_id > 0 ) {
+			$include_action_list = $include_children = false;
+		}
+		
+		$this->response = $response;
+		$this->include_action_list = $include_action_list;
+		$this->include_children = $include_children;
+		
+		$response_html = $this->render('index/response-list-item');
+		return $response_html;
 	}
 	
 }

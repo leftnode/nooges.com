@@ -330,7 +330,14 @@ form.search input.searchbutton {
 
 
 /* Nooges.com specific styles */
-.nooge-left {
+
+.nooge h3 {
+	margin: 0;
+	border-bottom: 1px solid #003366;
+
+}
+
+.nooge .nooge-left {
 	float: left;
 	width: 324px;
 	border-right: 1px solid #ababab;
@@ -338,25 +345,20 @@ form.search input.searchbutton {
 	min-height: 600px;
 }
 
-.nooge-left .inner {
+.nooge .nooge-left .inner {
 	margin-right: 10px;
 }
 
-.nooge-right {
+.nooge .nooge-right {
 	float: left;
 	width: 325px;
 	border-top: 1px solid #ababab;
 }
 
-.nooge-right .inner {
+.nooge .nooge-right .inner {
 	margin-left: 14px;
 }
 
-.nooge h3 {
-	margin: 0;
-	border-bottom: 1px solid #003366;
-
-}
 
 .nooge ul {
 	list-style: none;
@@ -391,13 +393,9 @@ form.search input.searchbutton {
 	-moz-border-radius: 0;
 }
 
-
-.nooge ul li ul li.respond-form {
+.nooge ul li.last {
 	border-bottom: 0;
 }
-
-
-
 
 .nooge ul li.zebra1 {
 	background: #ECEFF5;

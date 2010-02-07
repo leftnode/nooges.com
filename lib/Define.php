@@ -18,3 +18,6 @@ define('ZEBRA2', 'zebra2', false);
 
 define('VOTE_UP', 1, false);
 define('VOTE_DOWN', -1, false);
+
+define('SIDE_LEFT', 0, false);
+define('SIDE_RIGHT', 1, false);
