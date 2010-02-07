@@ -72,6 +72,7 @@ class Index_Controller extends Artisan_Controller {
 			$parent_id = $this->getParam('parent_id');
 			$side = $this->getParam('side');
 			$message = $this->getParam('message');
+			$message = trim($message);
 			
 			$poster_name = NOOGES_ANONYMOUS_USER;
 			$poster_email = NOOGES_ANONYMOUS_EMAIL;
@@ -107,6 +108,20 @@ class Index_Controller extends Artisan_Controller {
 			$message_id = Nooges::getDataModel()->save($forum_messages);
 		
 			if ( $message_id > 0 ) {
+				/* Update some values in `forum_topics` */
+				$forum_topic = Nooges::getDataModel()
+					->where('id_topic = ?', $topic_id)
+					->loadFirst(new Forum_Topics());
+				if ( true === $forum_topic->exists() ) {
+					$reply_count = $forum_topic->getNumReplies();
+					$forum_topic->setIdLastMsg($message_id)
+						->setNumReplies(++$reply_count);
+					
+					Nooges::getDataModel()->save($forum_topic);
+				}
+				
+				
+				
 				$nooges_response = new Nooges_Response();
 				$nooges_response->setIdTopic($topic_id)
 					->setIdMsg($message_id)
