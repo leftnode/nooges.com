@@ -427,7 +427,10 @@ form.search input.searchbutton {
 }
 
 .nooge ul li div.action-list a {
-	font-weight: bold;
-	margin-right: 8px;
+	margin-right: 5px;
 	font-size: 10px;
+}
+
+.nooge ul li div.action-list a span {
+	font-weight: normal;
 }

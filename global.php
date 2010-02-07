@@ -73,6 +73,19 @@ function nooges_get_latest_nooge() {
 	return $nooge;
 }
 
+function nooges_get_response($response_id) {
+	$response_id = intval($response_id);
+	
+	if ( $response_id < 1 ) {
+		return array();
+	}
+
+	$sql = "SELECT * FROM `nooges_response` nr
+		WHERE nr.nooges_response_id = ?";
+	$response = nooges_query_single($sql, array($response_id));
+	return $response;
+}
+
 function nooges_query_single($sql, $replace=array()) {
 	return nooges_query($sql, $replace, NOOGES_RETURN_SINGLE);
 }
