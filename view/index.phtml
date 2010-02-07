@@ -3,13 +3,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-	<title>Nooges.com</title>	
+	<title>Nooges.com</title>
 
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-	<link rel="stylesheet" href="css/nooges.css" type="text/css" />			
+	<link rel="stylesheet" href="css/nooges.css" type="text/css" />
+	
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript">
+		var Nooges = {
+			respond: function(response_id) {
+				var message = $('#' + response_id).val();
+				if ( 0 == message.length ) {
+					alert('Please enter a response first!');
+				}
+				
+				var data = {
+					message: message,
+					side: 0,
+					parent_id: 0
+				};
+				
+				this.postHtml('respond.http.php', data, function(html) {
+					alert(html);
+				});
+			},
+			
+			postHtml: function(url, data, callback) {
+				$.post(url, data, callback, 'html');
+			},
+			
+			postJson: function(url, data, callback) {
+				$.post(url, data, callback, 'json');
+			},
+			
+			getToken: function() {
+				return $('#token').val();
+			},
+			
+			buildUrl: function(url, form_id) {
+				var qs = $('#' + form_id).serialize();
+				url += '?' + qs;
+				return url;
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -75,23 +115,37 @@
 			<div class="nooge">
 				<div class="nooge-left">
 					<div class="inner">
-						<form method="post" action="#" class="reply">
+						<form method="post" action="#" class="reply" id="respond-left">
 							<label>Respond!</label>
-							<textarea rows="3"></textarea>
-							<p><input class="button" type="submit" value="Respond" /></p>
+							<textarea name="response" rows="3" id="response-left"></textarea>
+							<p>
+								<input type="hidden" name="side" value="0" />
+								<input class="button" type="button" value="Respond" onclick="Nooges.respond('response-left')" />
+							</p>
 						</form>
 					
 						<h3>Responses</h3>
-						<?php foreach ( $response_list_left as $response ): ?>
-						
-						
-						<?php endforeach; ?>
+						<ul>
+							<?php $i = 0; ?>
+							<?php foreach ( $response_list_left as $response ): ?>
+								<li class="<?php echo $zebra_list[$i++%2]; ?>">
+									<?php echo nooges_remove_html($response['body']); ?>
+									<div class="author">- <?php echo $response['poster_name']; ?></div>
+									<div class="action-list">
+										<a href="#">respond</a>
+										<a href="#">+ like</a>
+										<a href="#">- dislike</a>
+										<a href="#">see responses</a>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
 					</div>
 				</div>
 				
 				<div class="nooge-right">
 					<div class="inner">
-						<form method="post" action="#" class="reply">
+						<form method="post" action="#" class="reply" id="respond-right">
 							<label>Respond!</label>
 							<textarea rows="3"></textarea>
 							<p><input class="button" type="submit" value="Respond" /></p>

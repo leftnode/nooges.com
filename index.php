@@ -9,14 +9,7 @@ $board_list = nooges_query_all($sql);
 
 
 /* Get the latest nooge. */
-$sql = "SELECT fm.* FROM `forum_topics` ft
-	INNER JOIN `forum_messages` fm
-		ON ft.id_topic = fm.id_topic
-	WHERE ft.id_board = 2
-		AND ft.locked = 1
-	ORDER BY fm.poster_time DESC
-	LIMIT 1";
-$nooge = nooges_query_single($sql);
+$nooge = nooges_get_latest_nooge();
 
 
 /* Get all of the responses. */
@@ -29,8 +22,22 @@ $sql = "SELECT * FROM `nooges_response` nr
 	LIMIT 50";
 $response_list = nooges_query_all($sql, array($nooge['id_topic']));
 
-
+/* Order both of the lists into the left and right response lists. */
 $response_list_left = $response_list_right = array();
+foreach ( $response_list as $response ) {
+	switch ( $response['side'] ) {
+		case 0: {
+			$response_list_left[] = $response;
+			break;
+		}
+		
+		case 1: {
+			$response_list_right[] = $response;
+			break;
+		}
+	}
+}
+
 
 require_once 'view/index.phtml';
 
