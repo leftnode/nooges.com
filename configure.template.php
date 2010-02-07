@@ -30,6 +30,8 @@ define('DIR_JAVASCRIPT', DS . DIR_PUBLIC . 'javascript' . DS, false);
 define('DIR_LAYOUT', DIR_PUBLIC . 'layout' . DS, false);
 
 define('COOKIE_DOMAIN', '##COOKIE_DOMAIN##', false);
+define('COOKIE_NAME', $cookiename, false);
+define('SESSION_NAME', COOKIE_NAME, false);
 
 $config_db = array(
 	'server' => $db_server,

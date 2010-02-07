@@ -5,7 +5,16 @@
 	<?php $body = $this->safe($body); ?>
 	<?php echo nl2br($body); ?>
 	
-	<div class="author">- <?php echo $response->getPosterName(); ?></div>
+	<?php $member_id = $response->getIdMember(); ?>
+	
+	<div class="author">
+		<?php if ( $member_id > 0 ): ?>
+			- <a href="/forum/index.php?action=profile;u=<?php echo $member_id; ?>"><?php echo $response->getPosterName(); ?></a>
+		<?php else: ?>
+			- <?php echo $response->getPosterName(); ?>
+		<?php endif; ?>
+	</div>
+	
 	<div class="action-list">
 		<a href="#">respond</a>
 		<a href="javascript:Nooges.vote(<?php echo $rid; ?>, <?php echo VOTE_UP; ?>)">+like (<span id="response-like-<?php echo $rid; ?>"><?php echo $response->getLikeCount(); ?></span>)</a>

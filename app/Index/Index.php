@@ -73,15 +73,32 @@ class Index_Controller extends Artisan_Controller {
 			$side = $this->getParam('side');
 			$message = $this->getParam('message');
 			
+			$poster_name = NOOGES_ANONYMOUS_USER;
+			$poster_email = NOOGES_ANONYMOUS_EMAIL;
+			
+			/* See if there's a user ID in the session, if so, get the user from there. */
+			$user_id = er('user_id', $_SESSION, 0);
+			if ( $user_id > 0 ) {
+				$forum_member = Nooges::getDataModel()
+					->where('id_member = ?', $user_id)
+					->loadFirst(new Forum_Members());
+				
+				if ( true === $forum_member->exists() ) {
+					$poster_name = $forum_member->getRealName();
+					$poster_email = $forum_member->getEmailAddress();
+				}
+			}
+			
+			
 			/* Create the initial Forum_Messages record. */
 			$forum_messages = new Forum_Messages();
 			$forum_messages->setIdTopic($topic_id)
 				->setIdBoard(NOOGES_BOARD_ID)
 				->setPosterTime(time())
-				->setIdMember(0)
+				->setIdMember($user_id)
 				->setIdMsgModified(0)
-				->setPosterName(NOOGES_ANONYMOUS_USER)
-				->setPosterEmail(NOOGES_ANONYMOUS_EMAIL)
+				->setPosterName($poster_name)
+				->setPosterEmail($poster_email)
 				->setPosterIp(input_get_ipv4())
 				->setSmileysEnabled(STATUS_DISABLED)
 				->setBody($message)

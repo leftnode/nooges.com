@@ -59,7 +59,19 @@ class Nooges {
 		self::$is_cli = ( 'cli' === php_sapi_name() ? true : false );
 
 		if ( false === self::$is_cli ) {
-			Artisan_Session::get()->start();
+			/* Attempt to get the session ID from the forums */
+			$user_id = 0;
+			$smf_cookie = er(COOKIE_NAME, $_COOKIE);
+			if ( false === empty($smf_cookie) ) {
+				/* If this is set, we can get their user ID and use that to load data. */
+				$smf_cookie = unserialize($smf_cookie);
+				
+				$user_id = er(0, $smf_cookie, 0);
+			}
+			
+			session_start();
+
+			$_SESSION['user_id'] = $user_id;
 
 			/* Create the token for POST methods to prevent CSRF attacks. */
 			self::createToken();
