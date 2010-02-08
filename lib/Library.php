@@ -9,7 +9,7 @@ class Library {
 			'/\[s\](.*)\[\/s\]/i',
 			'/\[size=(\d+pt)\](.*)\[\/size\]/i',
 			'/\[color=([a-z]+)\](.*)\[\/color\]/i',
-			'/\[img](.*)\[img]/i',
+			'/\[img\](.*)\[\/img\]/i',
 			'/\[url=(.+)\](.*)\[\/url\]/iU'
 		);
 		
