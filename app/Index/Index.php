@@ -94,9 +94,13 @@ class Index_Controller extends Artisan_Controller {
 				if ( true === $forum_member->exists() ) {
 					$poster_name = $forum_member->getRealName();
 					$poster_email = $forum_member->getEmailAddress();
+					
+					/* Update the users post count. */
+					$post_count = $forum_member->getPosts();
+					$forum_member->setPosts(++$post_count);
+					Nooges::getDataModel()->save($forum_member);
 				}
 			}
-			
 			
 			/* Create the initial Forum_Messages record. */
 			$forum_messages = new Forum_Messages();
@@ -126,11 +130,6 @@ class Index_Controller extends Artisan_Controller {
 					
 					Nooges::getDataModel()->save($forum_topic);
 				}
-				
-				/* Update the users post count. */
-				$post_count = $forum_member->getPosts();
-				$forum_member->setPosts(++$post_count);
-				Nooges::getDataModel()->save($forum_member);
 				
 				/* Create the actual response. */
 				$nooges_response = new Nooges_Response();
