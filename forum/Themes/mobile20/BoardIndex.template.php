@@ -119,7 +119,7 @@ function template_main()
 				// If the board or children is new, show an indicator.
 				if ($board['new'] || $board['children_new'])
 					echo '
-						<img src="', $settings['images_url'], '/on', $board['new'] ? '' : '2', '.gif" alt="', $txt['new_posts'], '" title="', $txt['new_posts'], '" border="0" />';
+						<img src="', $settings['images_url'], '/on', $board['new'] ? '' : '2', '.png" alt="', $txt['new_posts'], '" title="', $txt['new_posts'], '" border="0" />';
 				// Is it a redirection board?
 				elseif ($board['is_redirect'])
 					echo '
@@ -127,7 +127,7 @@ function template_main()
 				// No new posts at all! The agony!!
 				else
 					echo '
-						<img src="', $settings['images_url'], '/off.gif" alt="', $txt['old_posts'], '" title="', $txt['old_posts'], '" />';
+						<img src="', $settings['images_url'], '/off.png" alt="', $txt['old_posts'], '" title="', $txt['old_posts'], '" />';
 
 				echo '
 					</a>
@@ -210,8 +210,8 @@ function template_main()
 	<div id="modbuttons_bottom" class="modbuttons clearfix">
 		<div id="posticons" class="clearfix marginbottom">
 			<div class="smalltext floatleft">
-				<img src="', $settings['images_url'], '/new_some.gif" alt="" align="middle" /> ', $txt['new_posts'], '
-				<img src="', $settings['images_url'], '/new_none.gif" alt="" align="middle" style="margin-left: 4ex;" /> ', $txt['old_posts'], '
+				<img src="', $settings['images_url'], '/new_some.png" alt="" align="middle" /> ', $txt['new_posts'], '
+				<img src="', $settings['images_url'], '/new_none.png" alt="" align="middle" style="margin-left: 4ex;" /> ', $txt['old_posts'], '
 			</div>';
 
 			// Mark read button.

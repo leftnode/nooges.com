@@ -1950,12 +1950,12 @@ Simple
 				<td rowspan="2">', $txt['manual_posting_bbc_img'], '</td>
 				<td rowspan="2"><img onmouseover="bbc_highlight(this, true);" onmouseout="bbc_highlight(this, false);" src="', $settings['images_url'], '/bbc/img.gif" alt="', $txt['manual_posting_bbc_img'], '" style="background-image: url(', $settings['images_url'], '/bbc/bbc_bg.gif); margin: 1px 2px 1px 1px;" /></td>
 				<td>', $txt['manual_posting_img_top_code'], '</td>
-				<td><img src="', $settings['images_url'], '/on.gif" alt="" /></td>
+				<td><img src="', $settings['images_url'], '/on.png" alt="" /></td>
 				<td rowspan="2">', $txt['manual_posting_img_top_comment'], '</td>
 			</tr>
 			<tr class="windowbg">
 				<td>', $txt['manual_posting_img_bottom_code'], '</td>
-				<td><img src="', $settings['images_url'], '/on.gif" width="48" height="48" alt="" /></td>
+				<td><img src="', $settings['images_url'], '/on.png" width="48" height="48" alt="" /></td>
 			</tr>
 			<tr class="windowbg2">
 				<td rowspan="2">', $txt['manual_posting_bbc_url'], '</td>

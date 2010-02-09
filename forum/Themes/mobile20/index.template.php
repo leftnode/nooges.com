@@ -220,7 +220,7 @@ function template_body_above()
   </div>';
 
   // Show a random news item? (or you could pick one from news_lines...)
-	if (!empty($settings['enable_news'])){
+	if (false && !empty($settings['enable_news'])){
 		echo '<div id="news">
 		  <b>', $txt['news'], ':</b> ', $context['random_news_line'], '</div>';}
   echo '

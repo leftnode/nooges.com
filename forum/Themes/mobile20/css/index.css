@@ -3464,13 +3464,13 @@ ul.nolist li
 }
 #logo {
 	position: absolute;
-	top: 2em;
-	left: 3em;
+	top: 5px;
+	left: 10px;
 	display: block;
 	width: 294px;
-	height: 47px;
+	height: 150px;
 	cursor: pointer;
-	background: url(../images/img/logo.gif) no-repeat;
+	background: url(/public/image/nooges-logo.png) no-repeat;
 }
 /* - floats - */
 .left,.alignleft {float: left; margin-left: 1.5em;}
