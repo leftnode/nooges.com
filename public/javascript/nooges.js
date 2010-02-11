@@ -16,7 +16,7 @@ var Nooges = {
 		
 		Nooges.postHtml(Nooges.buildUrl('index/create'), data, function(html) {
 			message_element.val('');
-			$('#' + response_list).prepend(html).trigger('zebra-stripe');
+			$('#' + response_list).prepend(html).show().trigger('zebra-stripe');
 		});
 	},
 	
@@ -50,7 +50,7 @@ var Nooges = {
 		};
 		
 		Nooges.postHtml(Nooges.buildUrl('index/load'), data, function(html) {
-			$('#response-list-children-' + response_id).html(html);
+			$('#response-list-children-' + response_id).html(html).show();
 		});
 	},
 	
