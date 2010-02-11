@@ -296,7 +296,9 @@ form.search input.searchbutton {
 	padding: 3px 0px;	
 	background: none;
 }
-
+#sidebar ul.sidemenu li.last {
+	border: 0;
+}
 /* footer */
 .footer { 
 	clear: both; 	

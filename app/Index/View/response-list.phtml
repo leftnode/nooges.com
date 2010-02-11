@@ -5,6 +5,7 @@
 		<form method="post" action="#" class="respond">
 			<textarea rows="2" id="response-left-<?php echo $parent_id; ?>"></textarea>
 			<p><input class="button" type="button" value="respond" onclick="Nooges.create('response-list-children-<?php echo $parent_id; ?>', 'response-left-<?php echo $parent_id; ?>', <?php echo $topic_id; ?>, <?php echo $parent_id; ?>, <?php echo $side; ?>);"></p>
+			<p><a href="javascript:Nooges.hide(<?php echo $parent_id; ?>);">Hide</a></p>
 		</form>
 	</li>
 <?php endif; ?>

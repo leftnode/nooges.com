@@ -54,6 +54,9 @@ var Nooges = {
 		});
 	},
 	
+	hide: function(response_id) {
+		$('#response-list-children-' + response_id).hide();
+	},
 	
 	postHtml: function(url, data, callback) {
 		data.token = Nooges.getToken();

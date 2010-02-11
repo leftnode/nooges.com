@@ -2,25 +2,15 @@
 	<h1>Discussion Forums</h1>
 	<div class="left-box">
 		<ul class="sidemenu">
+			<?php $i = 1; ?>
+			<?php $length = $board_list->length(); ?>
 			<?php foreach ( $board_list as $board ): ?>
-				<li>
+				<li <?php echo ( $i++ == $length ? 'class="last"' : NULL ); ?>>
 					<a href="/forum/index.php?board=<?php echo $board->id(); ?>">
 						<?php echo $board->getName(); ?>
 					</a>
 				</li>
 			<?php endforeach; ?>
 		</ul>
-	</div>
-
-	<h1>Daily Poll</h1>
-	<div class="left-box">
-		Daily Poll in here
-	</div>
-
-	<h1>Comment Of The Day</h1>
-	<div class="left-box">
-		<p>
-			<em>The Saint's will suck my sweaty nutsack.</em>
-		</p>
 	</div>
 </div>

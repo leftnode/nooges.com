@@ -8,21 +8,35 @@ class Index_Controller extends Artisan_Controller {
 	
 	
 	
-	public function indexGet() {
+	public function indexGet($id=0) {
 		try {
 			/* Some globals used for later. */
 			$forum_messages = new Forum_Messages();
 			$forum_topics = new Forum_Topics();
 			$nooges_response = new Nooges_Response();
 			
-			/* Query to load up the latest nooge. */
-			$nooge = Nooges::getDataModel()
-				->field($forum_messages->allFields())
+			/* Allow people to load up archived Nooges. */
+			$id_get = intval($this->getParam('id'));
+			if ( $id_get > 0 ) {
+				$id = $id_get;
+			}
+			
+			$dm = Nooges::getDataModel()->field($forum_messages->allFields())
 				->innerJoin($forum_messages, new Forum_Topics(), 'id_topic', NULL)
-				->where($forum_topics->fieldOp('id_board', '='), NOOGES_BOARD_ID)
-				->where($forum_topics->fieldOp('locked', '='), STATUS_ENABLED)
-				->orderBy($forum_messages->field('poster_time'), 'ASC')
+				->where($forum_topics->fieldOp('id_board', '='), NOOGES_BOARD_ID);
+
+			if ( $id > 0 ) {
+				$dm->where($forum_topics->fieldOp('id_topic', '='), $id);
+			} else {
+				$dm->where($forum_topics->fieldOp('locked', '='), STATUS_ENABLED);
+			}
+			
+			$nooge = $dm->orderBy($forum_messages->field('poster_time'), 'ASC')
 				->loadFirst($forum_messages);
+
+			if ( false === $nooge->exists() ) {
+				throw new Exception('Nooge not found!');
+			}
 
 			/**
 			 * Load the responses and filter them out into the proper response list.
@@ -36,6 +50,7 @@ class Index_Controller extends Artisan_Controller {
 				->loadAll($forum_messages);
 
 			$this->nooge = $nooge;
+			$this->site_url = er('site_root', Nooges::getConfigRouter());
 			
 			$nooge_list_left = $nooge_list->filter('side = ?', SIDE_LEFT)->fetch();
 			$nooge_list_right = $nooge_list->filter('side = ?', SIDE_RIGHT)->fetch();
@@ -44,7 +59,9 @@ class Index_Controller extends Artisan_Controller {
 			$this->response_list_right = $this->renderResponseList($nooge_list_right);
 
 			$this->renderLayout('index');
-		} catch ( Exception $e ) { }
+		} catch ( Exception $e ) {
+			$this->renderLayout('index-not-found');
+		}
 		
 		return true;
 	}
@@ -129,6 +146,15 @@ class Index_Controller extends Artisan_Controller {
 						->setNumReplies(++$reply_count);
 					
 					Nooges::getDataModel()->save($forum_topic);
+				}
+				
+				/* Load up the parent if there is one to update the response_count. */
+				if ( $parent_id > 0 ) {
+					$nooges_parent = Nooges::getDataModel()
+						->where('nooges_response_id = ?', $parent_id)
+						->loadFirst(new Nooges_Response());
+					$nooges_parent->updateResponseCount();
+					Nooges::getDataModel()->save($nooges_parent);
 				}
 				
 				/* Create the actual response. */
