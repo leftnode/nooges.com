@@ -5,6 +5,12 @@ Options Indexes +FollowSymLinks
 <IfModule mod_rewrite.c>
 	RewriteEngine on
 	
+	RewriteRule ^.*.git/* / [R=301,L]
+
+	RewriteCond %{HTTP_HOST} .
+	RewriteCond %{HTTP_HOST} !^nooges\.dev
+	RewriteRule (.*) http://nooges.dev/$1 [R=301,L]
+
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
 	
