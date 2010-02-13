@@ -52,8 +52,9 @@ h3 {
 
 /* images */
 img {
-	border: 2px solid #CCC;
+	border: 0;
 }
+
 img.float-right {
   margin: 5px 0px 10px 10px;  
 }
