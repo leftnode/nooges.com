@@ -10,7 +10,8 @@ class Library {
 			'/\[size=(\d+pt)\](.*)\[\/size\]/iU',
 			'/\[color=([a-z]+)\](.*)\[\/color\]/iU',
 			'/\[img\](.*)\[\/img\]/iU',
-			'/\[url=(.+)\](.*)\[\/url\]/iU'
+			'/\[url=(.+)\](.*)\[\/url\]/iU',
+			'/\[center\](.*)\[\/center\]/iU'
 		);
 		
 		$replace_to = array(
@@ -21,7 +22,8 @@ class Library {
 			'<span style="font-size:$1">$2</span>',
 			'<span style="color:$1">$2</span>',
 			'<img src="$1" />',
-			'<a href="$1" target="_blank">$2</a>'
+			'<a href="$1" target="_blank">$2</a>',
+			'<div align="center">$1</div>'
 		);
 		
 		return preg_replace($replace, $replace_to, $string);
