@@ -3,13 +3,13 @@
 class Library {
 	public static function parseBbc($string) {
 		$replace = array(
-			'/\[b\](.*)\[\/b\]/i',
-			'/\[i\](.*)\[\/i\]/i',
-			'/\[u\](.*)\[\/u\]/i',
-			'/\[s\](.*)\[\/s\]/i',
-			'/\[size=(\d+pt)\](.*)\[\/size\]/i',
-			'/\[color=([a-z]+)\](.*)\[\/color\]/i',
-			'/\[img\](.*)\[\/img\]/i',
+			'/\[b\](.*)\[\/b\]/iU',
+			'/\[i\](.*)\[\/i\]/iU',
+			'/\[u\](.*)\[\/u\]/iU',
+			'/\[s\](.*)\[\/s\]/iU',
+			'/\[size=(\d+pt)\](.*)\[\/size\]/iU',
+			'/\[color=([a-z]+)\](.*)\[\/color\]/iU',
+			'/\[img\](.*)\[\/img\]/iU',
 			'/\[url=(.+)\](.*)\[\/url\]/iU'
 		);
 		
